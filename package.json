@@ -4,7 +4,8 @@
   "description": "A map and information on authentic learning at the university of Bristol, for BILT.",
   "scripts": {
     "build": "eleventy",
-    "serve": "eleventy --serve"
+    "serve": "eleventy --serve",
+    "lint": "prettier ./*.njk --parser html --write && prettier --write \"{./admin/*,./*.html,./*.md}\""
   },
   "repository": {
     "type": "git",
