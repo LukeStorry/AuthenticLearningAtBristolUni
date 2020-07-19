@@ -1,5 +1,5 @@
 var nestedAccordion = require("nested-accordion");
-var authenticLearningDataFile = require("./_data/authenticlearningdata.json");
+var authenticLearningDataFile = require("./data.json");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("authentic_learning_accordion", () => {
@@ -38,4 +38,5 @@ module.exports = function (eleventyConfig) {
   );
 
   eleventyConfig.addPassthroughCopy("admin");
+  eleventyConfig.addPassthroughCopy("data.json");
 };

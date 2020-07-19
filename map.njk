@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Map | Authentic Learning at UoB</title>
+    <meta
+      name="description"
+      content="Here you can see which departments and courses offer Authentic-Learning based teaching at the University of Bristol, in an interactive map."
+/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet'/>
+
+    <style>
+      {% accordion_styles %}
+
+      .mapboxgl-popup {
+        max-width: 40rem !important;
+        width: 100%;
+        min-width: 30vh;
+        max-width: 60vh;
+      }
+      .mapboxgl-popup-close-button {
+        height: 1rem;
+        background-color: #ffcece;
+        padding: 5px;
+      }
+      .mapboxgl-popup-content {
+        max-height: 60vh;
+        overflow-y: scroll;
+        border-style: solid;
+        border-color: grey;
+      }
+      .mapboxgl-popup-content h6 {
+        font-size: 160%;
+        margin: 0.5rem;
+      }
+
+      #map,
+      body,
+      html {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <script>
+      let authenticLearningFeatures = {% authentic_learning_geojson %};
+      mapboxgl.accessToken = "pk.eyJ1IjoibHVrZXN0b3JyeSIsImEiOiJjazV2bXcycGIxaGw2M29wYmh2emVhd2JsIn0.LcBndAqyKWIRt-PXwLanyQ";
+
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [
+          -2.603, 51.4584
+        ],
+        zoom: 15,
+        pitch: 45
+      });
+
+      map.on("load", removePoiLabels);
+      map.on("load", addAuthenticLearningPoints);
+      map.on("load", add3dBuildingLayer);
+      map.on("click", (e) => console.log(e.lngLat.toArray().join(",")));
+
+      async function addAuthenticLearningPoints() {
+        console.log("GeoJson: ", {
+          authenticLearningFeatures,
+          count: authenticLearningFeatures.features.length,
+          totalSize: authenticLearningFeatures
+            .features
+            .reduce((s, f) => s + f.properties.size, 0)
+        });
+
+        map.addSource("authentic-learning-points", {
+          type: "geojson",
+          data: authenticLearningFeatures
+        });
+        map.addLayer({
+          id: "authentic-learning-text",
+          type: "symbol",
+          source: "authentic-learning-points",
+          layout: {
+            "text-field": ["get", "name"]
+          }
+        });
+        map.on("click", "authentic-learning-text", function (e) {
+          var coordinates = e
+            .features[0]
+            .geometry
+            .coordinates
+            .slice();
+          new mapboxgl
+            .Popup()
+            .setLngLat(coordinates)
+            .setHTML(e.features[0].properties.html)
+            .addTo(map);
+        });
+        map.on("mouseenter", "authentic-learning-text", function () {
+          map
+            .getCanvas()
+            .style
+            .cursor = "pointer";
+        });
+        map.on("mouseleave", "authentic-learning-text", function () {
+          map
+            .getCanvas()
+            .style
+            .cursor = "";
+        });
+
+        map.addLayer({
+          id: "authentic-learning-heatmap",
+          type: "heatmap",
+          source: "authentic-learning-points",
+          paint: {
+            // Increase the heatmap weight based on size property
+            "heatmap-weight": [
+              "interpolate",
+              ["linear"],
+              [
+                "get", "size"
+              ],
+              0,
+              0,
+              15,
+              1
+            ]
+          }
+        }, "waterway-label");
+      }
+
+      function removePoiLabels() {
+        map
+          .style
+          .stylesheet
+          .layers
+          .forEach((layer) => {
+            if (layer.id === "poi-label") {
+              map.removeLayer(layer.id);
+            }
+          });
+      }
+
+      function add3dBuildingLayer() {
+        map.addLayer({
+          id: "3d-buildings",
+          source: "composite",
+          "source-layer": "building",
+          filter: [
+            "==", "extrude", "true"
+          ],
+          type: "fill-extrusion",
+          minzoom: 14,
+          paint: {
+            "fill-extrusion-color": "#eee",
+            "fill-extrusion-opacity": 0.8,
+            "fill-extrusion-height": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              14.5,
+              0,
+              15.5,
+              [
+                "get", "height"
+              ]
+            ]
+          }
+        },
+        // Insert the layer beneath any symbol layer.
+        map.getStyle().layers.find((layer) => layer.type === "symbol" && layer.layout["text-field"]).id);
+      }
+    </script>
+  </body>
+</html>

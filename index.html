@@ -10,23 +10,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
-      html{
-          font-family: Arial, Helvetica, sans-serif;
+      html {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: grey;
+      }
+      section {
+        background-color: white;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 10px;
+      }
+      h1,
+      h3,
+      h4 {
+        margin-bottom: 0;
+      }
+      .center {
+        text-align: center;
+      }
+      .large {
+        font-size: 120%;
       }
     </style>
   </head>
   <body>
-    <h1>
-      Authentic Learning At the University of Bristol
-    </h1>
-
-    <p>
-      View info in an interactive map <a href="/map">here</a>, or an accessible
-      dropdown format <a href="/dropdown">here</a>
-    </p>
-    
-    <p>
-        These pages have been built to be able to be embedded in any site, see the sourcecode of the <a href="/demo">demo page</a> for an example.
+    <section class="large center">
+      <h1>
+        Authentic Learning At the University of Bristol
+      </h1>
+      <p>
+        Here you can see which departments and courses offer Authentic-Learning
+        based teaching at the University of Bristol.
       </p>
+    </section>
+    <section>
+      <h3>View</h3>
+      <p>
+        View the raw data <a href="/data.json">here</a>, in an interactive map
+        <a href="/map">here</a>, or in an accessible dropdown format
+        <a href="/dropdown">here</a>.
+      </p>
+    </section>
+    <section>
+      <h3>Embedding</h3>
+      <p>
+        These pages/widgets have been built to be able to be embedded in any
+        site, via iframes
+      </p>
+
+      <h4>Map</h4>
+      <pre><code>&lt;iframe style="width: 80vw; height: 60vh;" src="https://authenticlearningatbristoluni.netlify.app/map"&gt;&lt;/iframe&gt;</code></pre>
+
+      <iframe style="width: 80vw; height: 60vh;" src="/map"></iframe>
+
+      <h4>Dropdowns</h4>
+      <pre><code>&lt;iframe style="width: 50vw; height: 60vh;" width="500" height="400" src="/dropdown"&gt;&lt;/iframe&gt;</code></pre>
+
+      <iframe style="width: 50vw; height: 60vh;" src="/dropdown"></iframe>
+    </section>
+
+    <section>
+      <p class="center">
+        Research by
+        <a href="https://marniewoodmeade.co.uk">Marnie Woodmeade</a>, code by
+        <a href="https://lukestorry.co.uk">Luke Storry</a>.
+      </p>
+      <p class="center">
+        Please email
+        <a
+          href="mailto:luke@storry.uk?subject=Authentic Learning at Uob website issues"
+          >luke@storry.uk</a
+        >
+        with any suggestions or issues.
+      </p>
+    </section>
   </body>
 </html>
