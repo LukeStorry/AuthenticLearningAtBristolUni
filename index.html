@@ -8,7 +8,8 @@
       content="Here you can see which departments and courses offer Authentic-Learning based teaching at the University of Bristol."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/icon" />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
       body {
@@ -95,5 +96,17 @@
         with any suggestions or issues.
       </p>
     </section>
+
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

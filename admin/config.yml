@@ -1,0 +1,12 @@
+backend:
+  name: git-gateway
+media_folder: ""
+collections:
+  - name: "data"
+    label: "Data"
+    files:
+      - name: "authenticlearningdata"
+        label: "Authentic Learning Data"
+        file: "data.json"
+        fields:
+          - { label: "Data", name: "data", widget: "NestedJsonEditor" }
