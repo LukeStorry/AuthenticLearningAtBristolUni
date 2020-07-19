@@ -39,4 +39,5 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("data.json");
+  eleventyConfig.addPassthroughCopy("favicon.ico");
 };
