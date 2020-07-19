@@ -10,9 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
-      html {
+      body {
         font-family: Arial, Helvetica, sans-serif;
         background-color: grey;
+        margin: 0;
+        padding: 1rem;
       }
       section {
         background-color: white;
@@ -30,6 +32,14 @@
       }
       .large {
         font-size: 120%;
+      }
+      pre {
+        display: inline-block;
+        padding: 0.2rem;
+        background-color: beige;
+        white-space: pre-wrap;
+        word-break: break-all;
+        border-radius: 5px;
       }
     </style>
   </head>
@@ -55,16 +65,16 @@
       <h3>Embedding</h3>
       <p>
         These pages/widgets have been built to be able to be embedded in any
-        site, via iframes
+        site, via iframes.
       </p>
 
       <h4>Map</h4>
-      <pre><code>&lt;iframe style="width: 80vw; height: 60vh;" src="https://authenticlearningatbristoluni.netlify.app/map"&gt;&lt;/iframe&gt;</code></pre>
+      <pre><code>&lt;iframe style="width: 100%; height: 60vh;" src="https://authenticlearningatbristoluni.netlify.app/map"&gt;&lt;/iframe&gt;</code></pre>
 
-      <iframe style="width: 80vw; height: 60vh;" src="/map"></iframe>
+      <iframe style="width: 100%; height: 60vh;" src="/map"></iframe>
 
       <h4>Dropdowns</h4>
-      <pre><code>&lt;iframe style="width: 50vw; height: 60vh;" width="500" height="400" src="/dropdown"&gt;&lt;/iframe&gt;</code></pre>
+      <pre><code>&lt;iframe style="width: 50vw; height: 60vh;" width="500" height="400" src="https://authenticlearningatbristoluni.netlify.app/dropdown"&gt;&lt;/iframe&gt;</code></pre>
 
       <iframe style="width: 50vw; height: 60vh;" src="/dropdown"></iframe>
     </section>
