@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Map | Authentic Learning at UoB</title>
     <meta
       name="description"
       content="Here you can see which departments and courses offer Authentic-Learning based teaching at the University of Bristol, in an interactive map."
-/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css"
       rel="stylesheet"
-/>
+    />
 
     <style>
       {% accordion_styles %}
@@ -37,8 +37,8 @@
       @media only screen and (min-width: 750px) {
         #infoPanel {
           height: 100vh !important;
-          width: 40%;
-          max-width: 30rem;
+          width: 50%;
+          max-width: 35rem;
           padding: 2rem !important;
           border-radius: 0 2rem 2rem 0 !important;
         }
@@ -64,32 +64,124 @@
       #infoHeader {
         text-align: center;
       }
+      #infoBox h4 {
+        margin-bottom: 0;
+      }
       details {
         background-color: white;
+      }
+      p {
+        margin: 0;
       }
     </style>
   </head>
 
   <body>
     <div id="infoPanel">
-      <h2 id="infoHeader">Authentic Learning at the University of Bristol.</h2>
-
+      <h2 id="infoHeader">Authentic Learning at the University of Bristol</h2>
       <div id="infoBox">
-        <p style="font-weight: bold;">
-          Click on a Faculty name in the map to see more info.
-        </p>
+        <h4>How to use this map</h4>
         <p>
-          You can view an accessible version with dropdown menus
-          <a href="/dropdown">here</a>
+          This map shows all of the open units that include elements of
+          authentic learning. This could be in their teaching practices,
+          integrating assessment, or having students collaborate to produce a
+          polished product. This map will show you where you can find these
+          units, who can take them and how they will contribute to building
+          student skills.
         </p>
-        Research by
-        <a href="https://marniewoodmeade.co.uk">Marnie Woodmeade</a>, code by
-        <a href="https://lukestorry.co.uk">Luke Storry</a>. Please email
-        <a
-          href="mailto:luke@storry.uk?subject=Authentic Learning at Uob website issues"
-          >luke@storry.uk</a
-        >
-        with any suggestions or issues.
+        <h4>What’s not on this map</h4>
+        <p>
+          Any units that are not open to all students are not included, neither
+          are independent research projects such as dissertations. If you would
+          like to find more examples of students as researchers check out the
+          BILT Blog.
+        </p>
+        <h4>
+          What is authentic learning and why it is crucial for learning and
+          teaching?
+        </h4>
+        <p>
+          Authentic learning is designed to teach and highlight a wide variety
+          of soft skills that are useful outside of acidaemia. Furthermore,
+          units that allow you to highlight the real-world relevance and by
+          reflecting on the processes of how you learn and what you have
+          achieved it can help students to understand and communicate the value
+          of their time at university.
+        </p>
+        <br />
+        <p>
+          <br />
+          This map uses Lombardi’s 10 key tenants of authentic learning to
+          identify elements of authenticity within units.
+        </p>
+        <ol>
+          <li>
+            <strong>Real-world relevance:</strong> Authentic activities match
+            the real-world tasks of professionals in practice as nearly as
+            possible. Learning rises to the level of authenticity when it asks
+            students to work actively with abstract concepts, facts, and
+            formulae inside a realistic— and highly social—context mimicking
+            “the ordinary practices of the [disciplinary] culture.”
+          </li>
+          <li>
+            <strong>Ill-defined problem:</strong> Challenges cannot be solved
+            easily by the application of an existing algorithm; instead,
+            authentic activities are relatively undefined and open to multiple
+            interpretations, requiring students to identify for themselves the
+            tasks and subtasks needed to complete the major task.
+          </li>
+          <li>
+            <strong>Sustained investigation:</strong> Problems cannot be solved
+            in a matter of minutes or even hours. Instead, authentic activities
+            comprise complex tasks to be investigated by students over a
+            sustained period of time, requiring significant investment of time
+            and intellectual resources.
+          </li>
+          <li>
+            <strong>Multiple sources and perspectives:</strong> Learners are not
+            given a list of resources. Authentic activities provide the
+            opportunity for students to examine the task from a variety of
+            theoretical and practical perspectives, using a variety of
+            resources, and requires students to distinguish relevant from
+            irrelevant information in the process.
+          </li>
+          <li>
+            <strong>Collaboration:</strong> Success is not achievable by an
+            individual learner working alone. Authentic activities make
+            collaboration integral to the task, both within the course and in
+            the real world.
+          </li>
+          <li>
+            <strong>Reflection (metacognition):</strong> Authentic activities
+            enable learners to make choices and reflect on their learning, both
+            individually and as a team or community.
+          </li>
+          <li>
+            <strong>Interdisciplinary perspective:</strong> Relevance is not
+            confined to a single domain or subject matter specialization.
+            Instead, authentic activities have consequences that extend beyond a
+            particular discipline, encouraging students to adopt diverse roles
+            and think in interdisciplinary terms.
+          </li>
+          <li>
+            <strong>Integrated assessment:</strong> Assessment is not merely
+            summative in authentic activities but is woven seamlessly into the
+            major task in a manner that reflects real-world evaluation
+            processes.
+          </li>
+          <li>
+            <strong>Polished products:</strong> Conclusions are not merely
+            exercises or substeps in preparation for something else. Authentic
+            activities culminate in the creation of a whole product, valuable in
+            its own right.
+          </li>
+          <li>
+            <strong> Multiple interpretations and outcomes:</strong> Rather than
+            yielding a single correct answer obtained by the application of
+            rules and procedures, authentic activities allow for diverse
+            interpretations and competing solutions.”
+          </li>
+        </ol>
       </div>
     </div>
     <div id="map"></div>
