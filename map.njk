@@ -25,27 +25,44 @@
         font-family: Arial, Helvetica, sans-serif;
       }
 
-      #info,
+      #infoPanel,
       #map {
         position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
         height: 100%;
       }
-      #map {
-        width: 100%;
+
+      @media only screen and (min-width: 750px) {
+        #infoPanel {
+          height: 100vh !important;
+          width: 40%;
+          max-width: 30rem;
+          padding: 2rem !important;
+          border-radius: 0 2rem 2rem 0 !important;
+        }
       }
 
-      #info {
+      #infoPanel {
         box-sizing: border-box;
+        height: 50%;
         z-index: 101;
-        width: 40%;
-        padding: 2rem;
-        overflow-y: scroll;
-        border-radius: 0 1rem 1rem 0;
+        padding: 1rem;
+        border-radius: 0 0 2rem 2rem;
         background-color: #fffa;
         opacity: 0.8;
         backdrop-filter: saturate(200%) blur(3px);
+        display: flex;
+        flex-direction: column;
+      }
+      #infoBox {
+        flex: 1;
+        padding: 1rem;
+        overflow-y: scroll;
+      }
+      #infoHeader {
+        text-align: center;
       }
       details {
         background-color: white;
@@ -54,38 +71,45 @@
   </head>
 
   <body>
-    <div id="info">
-      <h4>
-        Here you can see which departments and courses offer Authentic-Learning
-        based teaching at the University of Bristol.
-      </h4>
-      <p>
-        You can view an accessible version with dropdown menus
-        <a href="/dropdown">here</a>
-      </p>
-      Research by <a href="https://marniewoodmeade.co.uk">Marnie Woodmeade</a>,
-      code by <a href="https://lukestorry.co.uk">Luke Storry</a>. Please email
-      <a
-        href="mailto:luke@storry.uk?subject=Authentic Learning at Uob website issues"
-        >luke@storry.uk</a
-      >
-      with any suggestions or issues.
+    <div id="infoPanel">
+      <h2 id="infoHeader">Authentic Learning at the University of Bristol.</h2>
 
+      <div id="infoBox">
+        <p style="font-weight: bold;">
+          Click on a Faculty name in the map to see more info.
+        </p>
+        <p>
+          You can view an accessible version with dropdown menus
+          <a href="/dropdown">here</a>
+        </p>
+        Research by
+        <a href="https://marniewoodmeade.co.uk">Marnie Woodmeade</a>, code by
+        <a href="https://lukestorry.co.uk">Luke Storry</a>. Please email
+        <a
+          href="mailto:luke@storry.uk?subject=Authentic Learning at Uob website issues"
+          >luke@storry.uk</a
+        >
+        with any suggestions or issues.
+      </div>
     </div>
     <div id="map"></div>
 
     <script>
-      let infoDiv = document.getElementById("info");
+      let infoHeader = document.getElementById("infoHeader");
+      let infoBox = document.getElementById("infoBox");
       let authenticLearningFeatures = {% authentic_learning_geojson %};
       mapboxgl.accessToken = "pk.eyJ1IjoibHVrZXN0b3JyeSIsImEiOiJjazV2bXcycGIxaGw2M29wYmh2emVhd2JsIn0.LcBndAqyKWIRt-PXwLanyQ";
-
       var map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",
-        center: [
-          -2.609, 51.458
-        ],
-        zoom: 15.2,
+        center: (window.innerWidth > 750)
+          ? [-2.609, 51.458]
+          : [
+            -2.608, 51.465
+          ],
+        zoom: (window.innerWidth > 750)
+          ? 15.2
+          : 13,
         pitch: 45
       });
 
@@ -111,13 +135,25 @@
           id: "authentic-learning-text",
           type: "symbol",
           source: "authentic-learning-points",
+          minzoom: 13.5,
           layout: {
-            "text-field": ["get", "name"]
+            "text-field": [
+              "get", "name"
+            ],
+            "text-justify": "auto",
+            "text-size": (window.innerWidth > 750)
+              ? 16
+              : 14,
+            "text-variable-anchor": ["center", "left", "right", "bottom", "top"]
           }
         });
         map.on("click", "authentic-learning-text", function (e) {
-          infoDiv.innerText = '';
-          infoDiv.insertAdjacentHTML('afterbegin', e.features[0].properties.html)
+          infoHeader.innerText = e
+            .features[0]
+            .properties
+            .name;
+          infoBox.innerText = '';
+          infoBox.insertAdjacentHTML('afterbegin', e.features[0].properties.html)
         });
         map.on("mouseenter", "authentic-learning-text", function () {
           map

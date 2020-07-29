@@ -14,8 +14,7 @@ module.exports = function (eleventyConfig) {
       type: "Feature",
       properties: {
         name: location.title,
-        html: `<h2>${location.title}</h2>
-      ${nestedAccordionHtml}`,
+        html: nestedAccordionHtml,
         size: nestedAccordionHtml.length,
       },
       geometry: {
