@@ -1,77 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Map | Authentic Learning at UoB</title>
     <meta
       name="description"
       content="Here you can see which departments and courses offer Authentic-Learning based teaching at the University of Bristol, in an interactive map."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css"
       rel="stylesheet"
-    />
+/>
 
     <style>
       {% accordion_styles %}
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      .mapboxgl-popup {
-        max-width: 40rem !important;
-        width: 100%;
-        min-width: 30vh;
-        max-width: 60vh;
-      }
-      .mapboxgl-popup-close-button {
-        height: 1rem;
-        background-color: #ffcece;
-        padding: 5px;
-      }
-      .mapboxgl-popup-content {
-        max-height: 60vh;
-        overflow-y: scroll;
-        border-style: solid;
-        border-color: grey;
-      }
-      .mapboxgl-popup-content h6 {
-        font-size: 160%;
-        margin: 0.5rem;
-      }
-
-      #map,
       body,
       html {
         margin: 0;
         width: 100%;
         height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #info,
+      #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+      }
+      #map {
+        width: 100%;
       }
 
       #info {
-        position: absolute;
-        top: 1rem;
-        margin: 0;
-        right: 1rem;
-        padding: 0.5rem;
-        z-index: 99;
+        box-sizing: border-box;
+        z-index: 101;
+        width: 40%;
+        padding: 2rem;
+        overflow-y: scroll;
+        border-radius: 0 1rem 1rem 0;
         background-color: #fffa;
-        border-radius: 1rem;
-        max-width: 30vw;
+        opacity: 0.8;
         backdrop-filter: saturate(200%) blur(3px);
       }
-      #info summary {
-        text-align: right;
-        outline: none;
+      details {
+        background-color: white;
       }
     </style>
   </head>
 
   <body>
-    <details id="info">
-      <summary>Info</summary>
+    <div id="info">
       <h4>
         Here you can see which departments and courses offer Authentic-Learning
         based teaching at the University of Bristol.
@@ -87,10 +70,12 @@
         >luke@storry.uk</a
       >
       with any suggestions or issues.
-    </details>
+
+    </div>
     <div id="map"></div>
 
     <script>
+      let infoDiv = document.getElementById("info");
       let authenticLearningFeatures = {% authentic_learning_geojson %};
       mapboxgl.accessToken = "pk.eyJ1IjoibHVrZXN0b3JyeSIsImEiOiJjazV2bXcycGIxaGw2M29wYmh2emVhd2JsIn0.LcBndAqyKWIRt-PXwLanyQ";
 
@@ -98,9 +83,9 @@
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",
         center: [
-          -2.603, 51.4584
+          -2.609, 51.458
         ],
-        zoom: 15,
+        zoom: 15.2,
         pitch: 45
       });
 
@@ -131,16 +116,8 @@
           }
         });
         map.on("click", "authentic-learning-text", function (e) {
-          var coordinates = e
-            .features[0]
-            .geometry
-            .coordinates
-            .slice();
-          new mapboxgl
-            .Popup()
-            .setLngLat(coordinates)
-            .setHTML(e.features[0].properties.html)
-            .addTo(map);
+          infoDiv.innerText = '';
+          infoDiv.insertAdjacentHTML('afterbegin', e.features[0].properties.html)
         });
         map.on("mouseenter", "authentic-learning-text", function () {
           map
