@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Map | Authentic Learning at UoB</title>
     <meta
       name="description"
       content="Here you can see which departments and courses offer Authentic-Learning based teaching at the University of Bristol, in an interactive map."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css"
       rel="stylesheet"
-    />
+/>
 
     <style>
       {% accordion_styles %}
@@ -38,9 +38,10 @@
         #infoPanel {
           height: 100vh !important;
           width: 50%;
-          max-width: 35rem;
-          padding: 2rem !important;
+          max-width: 40rem;
+          padding: 1rem !important;
           border-radius: 0 2rem 2rem 0 !important;
+          resize: horizontal !important;
         }
       }
 
@@ -55,14 +56,18 @@
         backdrop-filter: saturate(200%) blur(3px);
         display: flex;
         flex-direction: column;
+        overflow: auto;
+        resize: vertical;
       }
       #infoBox {
+        border-radius: 0.5rem;
         flex: 1;
-        padding: 1rem;
+        padding: 0.5rem;
         overflow-y: scroll;
       }
       #infoHeader {
         text-align: center;
+        margin: 0;
       }
       #infoBox h4 {
         margin-bottom: 0;
@@ -108,9 +113,9 @@
           achieved it can help students to understand and communicate the value
           of their time at university.
         </p>
-        <br />
+        <br/>
         <p>
-          <br />
+          <br/>
           This map uses Lombardi’s 10 key tenants of authentic learning to
           identify elements of authenticity within units.
         </p>
