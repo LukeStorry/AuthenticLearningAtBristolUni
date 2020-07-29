@@ -1555,10 +1555,10 @@ neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-nested-accordion@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/nested-accordion/-/nested-accordion-2.0.1.tgz#312322228db7b5b259297bda3fc09aa1e5dfea5d"
-  integrity sha512-ojmad5w4fgmPd1gEgA3+KJEpOEOPGmnMrtOxs3BddZfMhxChjMvS6QFQlLGWeuwfR+ScxWdQwo+5ZqVdTcojqw==
+nested-accordion@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/nested-accordion/-/nested-accordion-2.0.2.tgz#ea0c6ed9255263520dd19141fd129be6e4812d38"
+  integrity sha512-gs+TPlueFu3opk2i1lKI8aNsNHxzukEARUHJhbfsAxZkSGIU+W1W9SisHwV+FXdEgVjKJtXQxHzrbvH5dZ0t4g==
 
 nopt@^4.0.3:
   version "4.0.3"

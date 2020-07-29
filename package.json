@@ -16,6 +16,6 @@
   "homepage": "https://authenticlearningatbristoluni.netlify.app",
   "dependencies": {
     "@11ty/eleventy": "^0.11.0",
-    "nested-accordion": "2.0.1"
+    "nested-accordion": "2.0.2"
   }
 }
